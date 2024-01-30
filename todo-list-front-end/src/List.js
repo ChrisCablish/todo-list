@@ -7,9 +7,7 @@ const initialItems = [
   // ... add more items here
 ];
 
-const List = () => {
-  const [items, setItems] = useState(initialItems);
-
+const List = ({ items, setItems }) => {
   const onDragEnd = (result) => {
     console.log("Test");
     if (!result.destination) {
