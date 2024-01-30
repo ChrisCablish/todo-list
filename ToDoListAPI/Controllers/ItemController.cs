@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using ToDoListAPI.Models;
 
 namespace ToDoListAPI.Controllers
@@ -30,6 +31,13 @@ namespace ToDoListAPI.Controllers
                 return NotFound();
             }
             return item;
+
         }
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<Item>>> GetAllItems()
+        {
+            return await _context.Items.ToListAsync();
+        }
+
     }
 }
