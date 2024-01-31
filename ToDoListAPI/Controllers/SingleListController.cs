@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using ToDoListAPI.Models; 
+using ToDoListAPI.Models;
+using Microsoft.EntityFrameworkCore;
 using System.Threading.Tasks; // Add this for asynchronous operations
+using ToDoListAPI.DTOs;
 
 namespace ToDoListAPI.Controllers
 {
@@ -30,14 +32,25 @@ namespace ToDoListAPI.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<SingleList>> GetSingleList(int id)
         {
-            var singleList = await _context.SingleLists.FindAsync(id);
+            var singleList = await _context.SingleLists
+                .Include(sl => sl.Items)
+                .FirstOrDefaultAsync(sl => sl.Id == id);
+
             if (singleList == null)
             {
                 return NotFound();
             }
-            return singleList;
+
+            var singleListDto = new SingleListReadDto
+            {
+                Id = singleList.Id,
+                Name = singleList.Name,
+                ItemIds = singleList.Items.Select(i => i.Id).ToList()
+            };
+
+            return Ok(singleListDto);
         }
 
-        // Additional methods can be added here
+        
     }
 }
