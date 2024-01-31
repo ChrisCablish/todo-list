@@ -5,6 +5,7 @@ import React, { useState, useEffect } from "react";
 
 function App() {
   const [items, setItems] = useState([]);
+  const [currentList, setCurrentList] = useState("Daily");
 
   const fetchItems = () => {
     fetch("https://localhost:44396/api/Item")
@@ -22,8 +23,13 @@ function App() {
   return (
     <div>
       {/* <List /> */}
-      <CreateForm onNewItem={handleNewItem} />
-      <RegularList items={items} setItems={setItems} />
+      <CreateForm onNewItem={handleNewItem} currentList={currentList} />
+      <RegularList
+        items={items}
+        setItems={setItems}
+        currentList={currentList}
+        setCurrentList={setCurrentList}
+      />
     </div>
   );
 }

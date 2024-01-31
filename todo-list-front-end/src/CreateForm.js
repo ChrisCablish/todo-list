@@ -1,11 +1,12 @@
 import React, { useState } from "react";
 
-const CreateForm = ({ onNewItem }) => {
+const CreateForm = ({ onNewItem, currentList }) => {
   const [description, setDescription] = useState("");
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    const item = { description: description, singleListIds: [1] };
+    const listId = currentList === "Daily" ? 2 : 3; // Use currentList to determine listId
+    const item = { description: description, singleListIds: [listId] };
 
     const response = await fetch("https://localhost:44396/api/Item", {
       method: "POST",
