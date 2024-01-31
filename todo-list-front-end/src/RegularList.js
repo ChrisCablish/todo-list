@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-function RegularList({ items, currentList, setCurrentList }) {
+function RegularList({ items, currentList, setCurrentList, singleLists }) {
   const handleListChange = (e) => {
     setCurrentList(e.target.value);
   };
@@ -12,13 +12,15 @@ function RegularList({ items, currentList, setCurrentList }) {
   const filteredItems = items.filter((item) =>
     item.singleListIds.includes(getListId(currentList))
   );
-
   return (
     <div>
       <div>
-        <select onChange={handleListChange} defaultValue={"Daily"}>
-          <option value="Daily">Daily</option>
-          <option value="Weekly">Weekly</option>
+        <select onChange={handleListChange} value={currentList}>
+          {singleLists.map((list) => (
+            <option key={list.id} value={list.name}>
+              {list.name}
+            </option>
+          ))}
         </select>
       </div>
       <h2>{currentList} Items</h2>

@@ -51,6 +51,13 @@ namespace ToDoListAPI.Controllers
             return Ok(singleListDto);
         }
 
-        
+        // Method to retrieve all SingleList entries
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<SingleList>>> GetAllSingleLists()
+        {
+            var singleLists = await _context.SingleLists.ToListAsync();
+            return Ok(singleLists);
+        }
+
     }
 }
