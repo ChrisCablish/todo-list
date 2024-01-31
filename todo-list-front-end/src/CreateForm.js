@@ -5,8 +5,8 @@ const CreateForm = ({ onNewItem }) => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+    const item = { description: description, singleListIds: [1] };
 
-    const item = { description: description };
     const response = await fetch("https://localhost:44396/api/Item", {
       method: "POST",
       headers: {
