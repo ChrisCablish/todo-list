@@ -1,11 +1,17 @@
 import React, { useState } from "react";
 
-const CreateForm = ({ onNewItem }) => {
+const CreateForm = ({ onNewItem, currentList, singleLists }) => {
   const [description, setDescription] = useState("");
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    const item = { description: description, singleListIds: [1] };
+    const singleList = singleLists.find((list) => list.name === currentList);
+    const listId = singleList ? singleList.id : null;
+    if (!listId) {
+      console.error("List not found");
+      return;
+    }
+    const item = { description: description, singleListIds: [listId] };
 
     const response = await fetch("https://localhost:44396/api/Item", {
       method: "POST",
