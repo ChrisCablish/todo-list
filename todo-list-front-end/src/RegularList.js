@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 
 function RegularList({ items, currentList, setCurrentList, singleLists }) {
   const handleListChange = (e) => {
@@ -6,7 +6,8 @@ function RegularList({ items, currentList, setCurrentList, singleLists }) {
   };
 
   const getListId = (listName) => {
-    return listName === "Daily" ? 2 : 3; // Assuming 2 for Daily, 3 for Weekly
+    const matchingList = singleLists.find((list) => list.name === listName);
+    return matchingList ? matchingList.id : null;
   };
 
   const filteredItems = items.filter((item) =>
