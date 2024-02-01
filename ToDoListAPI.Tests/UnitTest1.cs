@@ -1,9 +1,12 @@
+using System;
+using Xunit;
+
 namespace ToDoListAPI.Tests;
 
-public class UnitTest1
+public class ItemTests
 {
     [Fact]
-    public void Test1()
+    public void AddItem_IncreasesCount()
     {
 
     }
