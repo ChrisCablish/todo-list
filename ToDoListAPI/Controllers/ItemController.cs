@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using ToDoListAPI.DTOs;
 using ToDoListAPI.Models;
+using ToDoListAPI.Services;
 
 namespace ToDoListAPI.Controllers
 {
@@ -10,69 +11,59 @@ namespace ToDoListAPI.Controllers
     public class ItemController : ControllerBase
     {
         private readonly YourDbContext _context;
-        public ItemController(YourDbContext context)
+        private readonly ItemService _itemService;
+
+        public ItemController(YourDbContext context, ItemService itemService)
         {
             _context = context;
-        }
+            _itemService = itemService;
+        }        
 
         [HttpPost]
         public async Task<IActionResult> CreateItem([FromBody] CreateItemDto createItemDto)
         {
-            var item = new Item { Description = createItemDto.Description };
+            var newItem = new Item { Description = createItemDto.Description };
+            var createdItem = await _itemService.AddItemAsync(newItem, createItemDto.SingleListIds);
 
-            foreach (var listId in createItemDto.SingleListIds)
+            var itemReadDto = new ItemReadDto
             {
-                var singleList = await _context.SingleLists.FindAsync(listId);
-                if (singleList != null)
-                {
-                    item.SingleLists.Add(singleList);
-                }
+                Id = createdItem.Id,
+                Description = createdItem.Description,
+                SingleListIds = createdItem.SingleLists.Select(sl => sl.Id).ToList()
+            };
+
+            return CreatedAtAction(nameof(GetItem), new { id = createdItem.Id }, itemReadDto);
+        }
+
+
+        [HttpGet("{id}")]
+        public async Task<ActionResult<ItemReadDto>> GetItem(int id)
+        {
+            var item = await _itemService.GetItemByIdAsync(id);
+            if (item == null)
+            {
+                return NotFound();
             }
-
-            _context.Items.Add(item);
-            await _context.SaveChangesAsync();
-
             var itemReadDto = new ItemReadDto
             {
                 Id = item.Id,
                 Description = item.Description,
                 SingleListIds = item.SingleLists.Select(sl => sl.Id).ToList()
             };
-
-            return CreatedAtAction(nameof(GetItem), new { id = item.Id }, itemReadDto);
-        }
-
-
-        [HttpGet("{id}")]
-        public async Task<ActionResult<Item>> GetItem(int id)
-        {
-
-            var item = await _context.Items
-                .Include(i => i.SingleLists)  // Include the SingleLists in the query
-                .FirstOrDefaultAsync(i => i.Id == id);
-
-            if (item == null)
-            {
-                return NotFound();
-            }
-            return item;
+            return Ok(itemReadDto);
         }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Item>>> GetAllItems()
+        public async Task<ActionResult<IEnumerable<ItemReadDto>>> GetAllItems()
         {
-            var items = await _context.Items
-                .Include(i => i.SingleLists)
-                .Select(i => new ItemReadDto
+            var items = await _itemService.GetAllItemsAsync();
+            var itemsReadDto = items.Select(item => new ItemReadDto
             {
-                Id = i.Id,
-                Description = i.Description,
-                SingleListIds = i.SingleLists.Select(sl => sl.Id).ToList()
-            })
-            .ToListAsync();
-
-            return Ok(items);
+                Id = item.Id,
+                Description = item.Description,
+                SingleListIds = item.SingleLists.Select(sl => sl.Id).ToList()
+            }).ToList();
+            return Ok(itemsReadDto);
         }
-
     }
 }

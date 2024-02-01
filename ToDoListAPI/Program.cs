@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
+using ToDoListAPI.Services;
 
 var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
 
@@ -18,6 +19,9 @@ builder.Services.AddSwaggerGen();
 // DbContext configuration
 builder.Services.AddDbContext<YourDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+
+// Registering the ItemService with the DI container
+builder.Services.AddScoped<IItemService, ItemService>(); 
 
 
 
