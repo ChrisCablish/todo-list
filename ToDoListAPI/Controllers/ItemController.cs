@@ -11,9 +11,9 @@ namespace ToDoListAPI.Controllers
     public class ItemController : ControllerBase
     {
         private readonly YourDbContext _context;
-        private readonly ItemService _itemService;
+        private readonly IItemService _itemService;
 
-        public ItemController(YourDbContext context, ItemService itemService)
+        public ItemController(YourDbContext context, IItemService itemService)
         {
             _context = context;
             _itemService = itemService;
