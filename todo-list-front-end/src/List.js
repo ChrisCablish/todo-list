@@ -2,8 +2,8 @@ import React, { useState } from "react";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 
 const initialItems = [
-  { id: "1", content: "Walk the dog" },
-  { id: "2", content: "Take out the trash" },
+  { id: "item-1", content: "Walk the dog" },
+  { id: "item-2", content: "Take out the trash" },
   // ... add more items here
 ];
 

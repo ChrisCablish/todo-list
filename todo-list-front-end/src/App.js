@@ -2,6 +2,9 @@ import List from "./List"; // Make sure the path is correct
 import CreateForm from "./CreateForm";
 import RegularList from "./RegularList";
 import React, { useState, useEffect } from "react";
+import IndividualListItem from "./IndividualListItemComponent";
+import "bootstrap/dist/css/bootstrap.min.css";
+import "./App.scss";
 
 function App() {
   const [items, setItems] = useState([]);
@@ -36,7 +39,6 @@ function App() {
 
   return (
     <div>
-      {/* <List /> */}
       <CreateForm
         onNewItem={handleNewItem}
         currentList={currentList}
@@ -49,6 +51,7 @@ function App() {
         setCurrentList={setCurrentList}
         singleLists={singleLists}
       />
+      <IndividualListItem />
     </div>
   );
 }

@@ -1,0 +1,26 @@
+:global(.dropdown-menu) {
+  background-color: transparent !important;
+}
+
+.ellipse {
+  width: 1.5rem;
+  height: auto;
+}
+
+.innerContainer {
+  display: flex;
+  align-items: center;
+}
+
+.itemText {
+  margin: 0;
+  font-size: 1.3rem;
+}
+
+.dropdown {
+  background-color: transparent !important;
+}
+
+:global(.dropdown-toggle::after) {
+  display: none !important;
+}
