@@ -1,6 +1,5 @@
 import React from "react";
 import ellipse from "./assets/img/ellipsis-horizontal-circle-outline-svgrepo-com.svg";
-
 import Dropdown from "react-bootstrap/Dropdown";
 import styles from "./IndividuallistItem.module.scss";
 
@@ -29,7 +28,6 @@ const IndividualListItem = () => {
               style={{ width: "1.5rem", height: "auto" }}
             />
           </Dropdown.Toggle>
-
           <Dropdown.Menu>
             <Dropdown.Item href="#/action-1">Action</Dropdown.Item>
             <Dropdown.Item href="#/action-2">Another action</Dropdown.Item>
