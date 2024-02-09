@@ -24,3 +24,7 @@
 :global(.dropdown-toggle::after) {
   display: none !important;
 }
+
+.isChecked {
+  text-decoration: line-through;
+}

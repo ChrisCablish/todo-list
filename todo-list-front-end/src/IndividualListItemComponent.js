@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import ellipse from "./assets/img/ellipsis-horizontal-circle-outline-svgrepo-com.svg";
 import Dropdown from "react-bootstrap/Dropdown";
 import styles from "./IndividuallistItem.module.scss";
@@ -8,13 +8,27 @@ const IndividualListItem = () => {
     console.log("clicked");
     return null;
   };
+
+  const [isChecked, setIsChecked] = useState(false);
+
+  const handleCheckBox = () => {
+    setIsChecked(!isChecked);
+  };
+
   return (
     <li className={styles.listItem}>
       <div className={styles.innerContainer}>
-        <input type="checkbox" className={styles.checkbox}></input>
-        <p className={styles.itemText}>This is a test</p>
-        {/* <img src={ellipse} className={styles.ellipse}></img> */}
-
+        <input
+          type="checkbox"
+          className={styles.checkbox}
+          checked={isChecked}
+          onChange={handleCheckBox}
+        ></input>
+        <p
+          className={`${styles.itemText} ${isChecked ? styles.isChecked : ""}`}
+        >
+          This is a test
+        </p>
         <Dropdown>
           <Dropdown.Toggle
             variant="success"
@@ -38,5 +52,4 @@ const IndividualListItem = () => {
     </li>
   );
 };
-
 export default IndividualListItem;
