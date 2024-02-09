@@ -1,8 +1,7 @@
-import List from "./List"; // Make sure the path is correct
+// import List from "./List";
 import CreateForm from "./CreateForm";
 import RegularList from "./RegularList";
 import React, { useState, useEffect } from "react";
-import IndividualListItem from "./IndividualListItemComponent";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.scss";
 
@@ -37,6 +36,10 @@ function App() {
     fetchItems(); // Refetch items after adding a new one
   };
 
+  const handleDeleteItem = () => {
+    fetchItems(); // Refetch items after deleting one
+  };
+
   return (
     <div>
       <CreateForm
@@ -50,8 +53,8 @@ function App() {
         currentList={currentList}
         setCurrentList={setCurrentList}
         singleLists={singleLists}
+        onDeleteItem={handleDeleteItem}
       />
-      <IndividualListItem />
     </div>
   );
 }

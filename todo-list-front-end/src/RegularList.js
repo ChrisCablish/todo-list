@@ -1,6 +1,13 @@
 import React from "react";
+import IndividualListItem from "./IndividualListItemComponent";
 
-function RegularList({ items, currentList, setCurrentList, singleLists }) {
+function RegularList({
+  items,
+  currentList,
+  setCurrentList,
+  singleLists,
+  onDeleteItem,
+}) {
   const handleListChange = (e) => {
     setCurrentList(e.target.value);
   };
@@ -27,7 +34,15 @@ function RegularList({ items, currentList, setCurrentList, singleLists }) {
       <h2>{currentList} Items</h2>
       <ul>
         {filteredItems.map((item) => (
-          <li key={item.id}>{item.description}</li>
+          // <li key={item.id}>{item.description}</li>
+          <IndividualListItem
+            key={item.id}
+            description={item.description}
+            id={item.id}
+            singleLists={singleLists}
+            currentList={currentList}
+            onDeleteItem={onDeleteItem}
+          />
         ))}
       </ul>
     </div>

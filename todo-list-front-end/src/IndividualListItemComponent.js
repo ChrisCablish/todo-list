@@ -3,16 +3,33 @@ import ellipse from "./assets/img/ellipsis-horizontal-circle-outline-svgrepo-com
 import Dropdown from "react-bootstrap/Dropdown";
 import styles from "./IndividuallistItem.module.scss";
 
-const IndividualListItem = () => {
-  const onMenuItemClick = () => {
-    console.log("clicked");
-    return null;
-  };
-
+const IndividualListItem = ({
+  description,
+  id,
+  singleLists,
+  currentList,
+  onDeleteItem,
+}) => {
   const [isChecked, setIsChecked] = useState(false);
 
   const handleCheckBox = () => {
     setIsChecked(!isChecked);
+  };
+
+  const moveToList = singleLists.filter((list) => list.name !== currentList);
+
+  const deleteHandler = async () => {
+    try {
+      const response = await fetch(`https://localhost:44396/api/Item/${id}`, {
+        method: "DELETE",
+      });
+      if (!response.ok) {
+        throw new Error("Error deleting item");
+      }
+      onDeleteItem();
+    } catch (error) {
+      console.error("Error:", error);
+    }
   };
 
   return (
@@ -27,7 +44,7 @@ const IndividualListItem = () => {
         <p
           className={`${styles.itemText} ${isChecked ? styles.isChecked : ""}`}
         >
-          This is a test
+          {description}
         </p>
         <Dropdown>
           <Dropdown.Toggle
@@ -43,9 +60,12 @@ const IndividualListItem = () => {
             />
           </Dropdown.Toggle>
           <Dropdown.Menu>
-            <Dropdown.Item href="#/action-1">Action</Dropdown.Item>
-            <Dropdown.Item href="#/action-2">Another action</Dropdown.Item>
-            <Dropdown.Item href="#/action-3">Something else</Dropdown.Item>
+            <Dropdown.Item onClick={deleteHandler}>Delete</Dropdown.Item>
+            {moveToList.map((list, index) => (
+              <Dropdown.Item href="#/action-1" key={index}>
+                Move to {list.name}
+              </Dropdown.Item>
+            ))}
           </Dropdown.Menu>
         </Dropdown>
       </div>
