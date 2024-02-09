@@ -74,5 +74,21 @@ namespace ToDoListAPI.Controllers
             return Ok(items);
         }
 
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteItem(int id)
+        {
+            var item = await _context.Items.FindAsync(id);
+            if (item == null)
+            {
+                return NotFound();
+            }
+
+            _context.Items.Remove(item);
+            await _context.SaveChangesAsync();
+
+            return NoContent(); // Returns a 204 No Content response
+        }
+
+
     }
 }
