@@ -34,7 +34,6 @@ function RegularList({
       <h2>{currentList} Items</h2>
       <ul>
         {filteredItems.map((item) => (
-          // <li key={item.id}>{item.description}</li>
           <IndividualListItem
             key={item.id}
             description={item.description}

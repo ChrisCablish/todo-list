@@ -1,25 +1,23 @@
 import React, { useState } from "react";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 
-const initialItems = [
-  { id: "item-1", content: "Walk the dog" },
-  { id: "item-2", content: "Take out the trash" },
-  // ... add more items here
-];
+const DraggableList = () => {
+  const initialItems = [
+    { id: "item-1", content: "Item 1" },
+    { id: "item-2", content: "Item 2" },
+    { id: "item-3", content: "Item 3" },
+  ];
 
-const List = ({ items, setItems }) => {
+  const [items, setItems] = useState(initialItems);
+
   const onDragEnd = (result) => {
-    console.log("Test");
-    if (!result.destination) {
-      return;
-    }
-    console.log("Test");
-    const reorderedItems = Array.from(items);
-    const [removed] = reorderedItems.splice(result.source.index, 1);
-    reorderedItems.splice(result.destination.index, 0, removed);
+    if (!result.destination) return;
 
-    setItems(reorderedItems);
-    console.log("Test");
+    const newArray = Array.from(items);
+    const [removed] = newArray.splice(result.source.index, 1);
+    newArray.splice(result.destination.index, 0, removed);
+
+    setItems(newArray);
   };
 
   return (
@@ -34,10 +32,6 @@ const List = ({ items, setItems }) => {
                     ref={provided.innerRef}
                     {...provided.draggableProps}
                     {...provided.dragHandleProps}
-                    style={{
-                      ...provided.draggableProps.style,
-                      marginBottom: "8px",
-                    }}
                   >
                     {item.content}
                   </div>
@@ -52,4 +46,4 @@ const List = ({ items, setItems }) => {
   );
 };
 
-export default List;
+export default DraggableList;
