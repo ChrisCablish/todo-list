@@ -1,7 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
+import IndividualListItem from "./IndividualListItemComponent";
 
-const DraggableList = ({ items }) => {
+const DraggableList = ({
+  items,
+  currentList,
+  setCurrentList,
+  singleLists,
+  onDeleteItem,
+}) => {
   const createItemsDto = (listItems) =>
     listItems.map((item) => ({
       id: String(item.id),
@@ -38,7 +45,14 @@ const DraggableList = ({ items }) => {
                     {...provided.draggableProps}
                     {...provided.dragHandleProps}
                   >
-                    {item.description}
+                    <IndividualListItem
+                      key={item.id}
+                      description={item.description}
+                      id={item.id}
+                      singleLists={singleLists}
+                      currentList={currentList}
+                      onDeleteItem={onDeleteItem}
+                    />
                   </div>
                 )}
               </Draggable>

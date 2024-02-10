@@ -55,7 +55,14 @@ function App() {
         singleLists={singleLists}
         onDeleteItem={handleDeleteItem}
       />
-      <DraggableList items={items} />
+      <DraggableList
+        items={items}
+        setItems={setItems}
+        currentList={currentList}
+        setCurrentList={setCurrentList}
+        singleLists={singleLists}
+        onDeleteItem={handleDeleteItem}
+      />
     </div>
   );
 }
