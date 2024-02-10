@@ -47,14 +47,6 @@ function App() {
         currentList={currentList}
         singleLists={singleLists}
       />
-      <RegularList
-        items={items}
-        setItems={setItems}
-        currentList={currentList}
-        setCurrentList={setCurrentList}
-        singleLists={singleLists}
-        onDeleteItem={handleDeleteItem}
-      />
       <DraggableList
         items={items}
         setItems={setItems}

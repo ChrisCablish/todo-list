@@ -9,18 +9,31 @@ const DraggableList = ({
   singleLists,
   onDeleteItem,
 }) => {
-  const createItemsDto = (listItems) =>
-    listItems.map((item) => ({
+  const handleListChange = (e) => {
+    setCurrentList(e.target.value);
+  };
+
+  const getListId = (listName) => {
+    const matchingList = singleLists.find((list) => list.name === listName);
+    return matchingList ? matchingList.id : null;
+  };
+
+  const filteredItems = items.filter((item) =>
+    item.singleListIds.includes(getListId(currentList))
+  );
+
+  const createItemsDto = (filteredItems) =>
+    filteredItems.map((item) => ({
       id: String(item.id),
       description: item.description,
     }));
 
-  const [itemsDto, setItemsDto] = useState(createItemsDto(items));
+  const [itemsDto, setItemsDto] = useState(createItemsDto(filteredItems));
 
   // Update itemsDto whenever items prop changes
   useEffect(() => {
-    setItemsDto(createItemsDto(items));
-  }, [items]); // Dependency array includes items to track changes
+    setItemsDto(createItemsDto(filteredItems));
+  }, [items, currentList, singleLists]); // Dependency array includes items to track changes
 
   const onDragEnd = (result) => {
     if (!result.destination) return;
@@ -33,35 +46,47 @@ const DraggableList = ({
   };
 
   return (
-    <DragDropContext onDragEnd={onDragEnd}>
-      <Droppable droppableId="droppable">
-        {(provided) => (
-          <div {...provided.droppableProps} ref={provided.innerRef}>
-            {itemsDto.map((item, index) => (
-              <Draggable key={item.id} draggableId={item.id} index={index}>
-                {(provided) => (
-                  <div
-                    ref={provided.innerRef}
-                    {...provided.draggableProps}
-                    {...provided.dragHandleProps}
-                  >
-                    <IndividualListItem
-                      key={item.id}
-                      description={item.description}
-                      id={item.id}
-                      singleLists={singleLists}
-                      currentList={currentList}
-                      onDeleteItem={onDeleteItem}
-                    />
-                  </div>
-                )}
-              </Draggable>
-            ))}
-            {provided.placeholder}
-          </div>
-        )}
-      </Droppable>
-    </DragDropContext>
+    <section>
+      <div>
+        <select onChange={handleListChange} value={currentList}>
+          {singleLists.map((list) => (
+            <option key={list.id} value={list.name}>
+              {list.name}
+            </option>
+          ))}
+        </select>
+      </div>
+      <h2>{currentList} Items</h2>
+      <DragDropContext onDragEnd={onDragEnd}>
+        <Droppable droppableId="droppable">
+          {(provided) => (
+            <div {...provided.droppableProps} ref={provided.innerRef}>
+              {itemsDto.map((item, index) => (
+                <Draggable key={item.id} draggableId={item.id} index={index}>
+                  {(provided) => (
+                    <div
+                      ref={provided.innerRef}
+                      {...provided.draggableProps}
+                      {...provided.dragHandleProps}
+                    >
+                      <IndividualListItem
+                        key={item.id}
+                        description={item.description}
+                        id={item.id}
+                        singleLists={singleLists}
+                        currentList={currentList}
+                        onDeleteItem={onDeleteItem}
+                      />
+                    </div>
+                  )}
+                </Draggable>
+              ))}
+              {provided.placeholder}
+            </div>
+          )}
+        </Droppable>
+      </DragDropContext>
+    </section>
   );
 };
 
