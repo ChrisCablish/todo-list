@@ -1,4 +1,4 @@
-import List from "./List";
+import DraggableList from "./List";
 import CreateForm from "./CreateForm";
 import RegularList from "./RegularList";
 import React, { useState, useEffect } from "react";
@@ -55,7 +55,7 @@ function App() {
         singleLists={singleLists}
         onDeleteItem={handleDeleteItem}
       />
-      <List items={items} />
+      <DraggableList items={items} />
     </div>
   );
 }
