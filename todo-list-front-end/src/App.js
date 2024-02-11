@@ -1,4 +1,4 @@
-import DraggableList from "./List";
+import DraggableList from "./DraggableList";
 import CreateForm from "./CreateForm";
 import RegularList from "./RegularList";
 import React, { useState, useEffect } from "react";
