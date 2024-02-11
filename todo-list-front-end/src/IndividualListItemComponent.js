@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import ellipse from "./assets/img/ellipsis-horizontal-circle-outline-svgrepo-com.svg";
+import ellipsis from "./assets/img/ellipsis-svgrepo-com.svg";
 import Dropdown from "react-bootstrap/Dropdown";
 import styles from "./IndividuallistItem.module.scss";
 
@@ -54,7 +54,7 @@ const IndividualListItem = ({
             className="icon-button no-arrow"
           >
             <img
-              src={ellipse}
+              src={ellipsis}
               alt="More options"
               style={{ width: "1.5rem", height: "auto" }}
             />
