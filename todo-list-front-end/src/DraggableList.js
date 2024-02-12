@@ -7,7 +7,7 @@ const DraggableList = ({
   currentList,
   setCurrentList,
   singleLists,
-  onDeleteItem,
+  handleItemCrud,
 }) => {
   const handleListChange = (e) => {
     setCurrentList(e.target.value);
@@ -26,6 +26,7 @@ const DraggableList = ({
     filteredItems.map((item) => ({
       id: String(item.id),
       description: item.description,
+      isComplete: item.isComplete,
     }));
 
   const [itemsDto, setItemsDto] = useState(createItemsDto(filteredItems));
@@ -76,7 +77,7 @@ const DraggableList = ({
                         isComplete={item.isComplete}
                         singleLists={singleLists}
                         currentList={currentList}
-                        onDeleteItem={onDeleteItem}
+                        handleItemCrud={handleItemCrud}
                       />
                     </div>
                   )}

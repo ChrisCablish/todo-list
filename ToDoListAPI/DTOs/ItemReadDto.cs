@@ -5,5 +5,6 @@
         public int Id { get; set; }
         public required string Description { get; set; } = string.Empty;
         public List<int> SingleListIds { get; set; } = new List<int>();
+        public bool IsComplete { get; set; } = false;
     }
 }

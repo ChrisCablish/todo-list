@@ -67,7 +67,8 @@ namespace ToDoListAPI.Controllers
             {
                 Id = i.Id,
                 Description = i.Description,
-                SingleListIds = i.SingleLists.Select(sl => sl.Id).ToList()
+                SingleListIds = i.SingleLists.Select(sl => sl.Id).ToList(),
+                IsComplete = i.IsComplete
             })
             .ToListAsync();
 
@@ -87,6 +88,22 @@ namespace ToDoListAPI.Controllers
             await _context.SaveChangesAsync();
 
             return NoContent(); // Returns a 204 No Content response
+        }
+
+
+        [HttpPut("{id}/complete")]
+        public async Task<IActionResult> ToggleItemComplete(int id, [FromBody] bool isComplete)
+        {
+            var item = await _context.Items.FindAsync(id);
+            if (item == null)
+            {
+                return NotFound();
+            }
+
+            item.IsComplete = isComplete;
+            await _context.SaveChangesAsync();
+
+            return Ok(item); 
         }
 
 

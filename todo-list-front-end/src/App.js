@@ -1,6 +1,5 @@
 import DraggableList from "./DraggableList";
 import CreateForm from "./CreateForm";
-import RegularList from "./RegularList";
 import React, { useState, useEffect } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.scss";
@@ -32,18 +31,14 @@ function App() {
     fetchSingleLists();
   }, []);
 
-  const handleNewItem = () => {
-    fetchItems(); // Refetch items after adding a new one
-  };
-
-  const handleDeleteItem = () => {
-    fetchItems(); // Refetch items after deleting one
+  const handleItemCrud = () => {
+    fetchItems(); //refetch items
   };
 
   return (
     <div>
       <CreateForm
-        onNewItem={handleNewItem}
+        handleItemCrud={handleItemCrud}
         currentList={currentList}
         singleLists={singleLists}
       />
@@ -53,7 +48,7 @@ function App() {
         currentList={currentList}
         setCurrentList={setCurrentList}
         singleLists={singleLists}
-        onDeleteItem={handleDeleteItem}
+        handleItemCrud={handleItemCrud}
       />
     </div>
   );

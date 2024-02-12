@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-const CreateForm = ({ onNewItem, currentList, singleLists }) => {
+const CreateForm = ({ handleItemCrud, currentList, singleLists }) => {
   const [description, setDescription] = useState("");
 
   const handleSubmit = async (event) => {
@@ -22,7 +22,7 @@ const CreateForm = ({ onNewItem, currentList, singleLists }) => {
     });
     if (response.ok) {
       console.log("Item created");
-      onNewItem();
+      handleItemCrud();
     } else {
       console.error("Error creating item");
     }
