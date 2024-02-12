@@ -53,11 +53,13 @@ const IndividualListItem = ({
             as="div"
             className="icon-button no-arrow"
           >
-            <img
-              src={ellipsis}
-              alt="More options"
-              style={{ width: "1.5rem", height: "auto" }}
-            />
+            <button className={styles.button}>
+              <img
+                src={ellipsis}
+                alt="More options"
+                style={{ width: "1.5rem", height: "auto" }}
+              />
+            </button>
           </Dropdown.Toggle>
           <Dropdown.Menu>
             <Dropdown.Item onClick={deleteHandler}>Delete</Dropdown.Item>

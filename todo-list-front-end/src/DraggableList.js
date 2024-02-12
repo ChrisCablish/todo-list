@@ -73,6 +73,7 @@ const DraggableList = ({
                         key={item.id}
                         description={item.description}
                         id={item.id}
+                        isComplete={item.isComplete}
                         singleLists={singleLists}
                         currentList={currentList}
                         onDeleteItem={onDeleteItem}
