@@ -31,15 +31,15 @@ const CreateForm = ({ handleItemCrud, currentList, singleLists }) => {
 
   return (
     <section>
-      <h1>Create new list item</h1>
       <form onSubmit={handleSubmit}>
         <input
           type="text"
           value={description}
           onChange={(e) => setDescription(e.target.value)}
           required
+          placeholder="New ToDo..."
         ></input>
-        <button type="submit">Create Item</button>
+        <button type="submit">Add</button>
       </form>
     </section>
   );
