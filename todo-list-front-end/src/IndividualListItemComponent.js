@@ -11,12 +11,6 @@ const IndividualListItem = ({
   handleItemCrud,
   isComplete,
 }) => {
-  const [isChecked, setIsChecked] = useState(isComplete);
-
-  const handleCheckBox = () => {
-    setIsChecked(!isChecked);
-  };
-
   const moveToList = singleLists.filter((list) => list.name !== currentList);
 
   const deleteHandler = async () => {
@@ -33,20 +27,46 @@ const IndividualListItem = ({
     }
   };
 
+  const [isChecked, setIsChecked] = useState(isComplete);
+
+  const updateIsComplete = async (newIsComplete) => {
+    try {
+      const response = await fetch(
+        `https://localhost:44396/api/Item/${id}/complete`,
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(newIsComplete),
+        }
+      );
+      if (!response.ok) {
+        setIsChecked(!isChecked); //revert optimistic UI if error
+        throw new Error("Error updating item complete status");
+      }
+      handleItemCrud(); //update and re-fetch items
+    } catch (error) {
+      console.error("Error:", error);
+    }
+  };
+
+  const handleCheckboxClick = () => {
+    const newIsComplete = !isChecked;
+    setIsChecked(newIsComplete); //optimistic UI change
+    updateIsComplete(newIsComplete); //backend changes
+  };
+
   return (
     <li className={styles.listItem}>
       <div className={styles.innerContainer}>
         <input
           type="checkbox"
           className={styles.checkbox}
-          checked={false}
-          onChange={handleCheckBox}
+          checked={isChecked}
+          onChange={handleCheckboxClick}
         ></input>
-        <p
-          className={`${styles.itemText} ${isChecked ? styles.isChecked : ""}`}
-        >
-          {description}
-        </p>
+        <p className={`${styles.itemText}`}>{description}</p>
         <Dropdown>
           <Dropdown.Toggle
             variant="success"
@@ -109,3 +129,6 @@ export default IndividualListItem;
 // Consistency Checks: In applications where data integrity and consistency are paramount, consider implementing periodic consistency checks or refresh mechanisms to ensure the UI remains in sync with the backend state over time.
 
 // By following these revised steps, you can implement a seamless and responsive user experience that optimistically reflects changes in the UI and gracefully handles any discrepancies between the frontend and backend states.
+
+//when checked
+//when checked set checked={!isChecked}
