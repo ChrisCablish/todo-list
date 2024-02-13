@@ -1,1 +1,29 @@
 @import "~bootstrap/scss/bootstrap";
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+.appWrapper {
+  border: 1px solid black;
+  display: flex;
+  flex-direction: column;
+  // width: fit-content;
+  width: 380px;
+  height: fit-content;
+  padding: 1.5rem;
+  border-radius: 1rem;
+  position: relative;
+  top: 5rem;
+}
+
+.App {
+  height: 100vh;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  // align-items: center;
+  position: absolute;
+}

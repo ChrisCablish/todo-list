@@ -36,21 +36,23 @@ function App() {
   };
 
   return (
-    <div>
-      <CreateForm
-        handleItemCrud={handleItemCrud}
-        currentList={currentList}
-        singleLists={singleLists}
-      />
-      <DraggableList
-        items={items}
-        setItems={setItems}
-        currentList={currentList}
-        setCurrentList={setCurrentList}
-        singleLists={singleLists}
-        handleItemCrud={handleItemCrud}
-      />
-    </div>
+    <section className="App">
+      <div className="appWrapper">
+        <CreateForm
+          handleItemCrud={handleItemCrud}
+          currentList={currentList}
+          singleLists={singleLists}
+        />
+        <DraggableList
+          items={items}
+          setItems={setItems}
+          currentList={currentList}
+          setCurrentList={setCurrentList}
+          singleLists={singleLists}
+          handleItemCrud={handleItemCrud}
+        />
+      </div>
+    </section>
   );
 }
 export default App;

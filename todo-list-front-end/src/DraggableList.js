@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 import IndividualListItem from "./IndividualListItemComponent";
+import styles from "./DraggableList.module.scss";
 
 const DraggableList = ({
   items,
@@ -48,7 +49,8 @@ const DraggableList = ({
 
   return (
     <section>
-      <div>
+      <div className="listPicker">
+        <span>List Picker</span>
         <select onChange={handleListChange} value={currentList}>
           {singleLists.map((list) => (
             <option key={list.id} value={list.name}>
@@ -57,7 +59,6 @@ const DraggableList = ({
           ))}
         </select>
       </div>
-      <h2>{currentList} Items</h2>
       <DragDropContext onDragEnd={onDragEnd}>
         <Droppable droppableId="droppable">
           {(provided) => (

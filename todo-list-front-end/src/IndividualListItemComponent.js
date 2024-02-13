@@ -60,13 +60,15 @@ const IndividualListItem = ({
   return (
     <li className={styles.listItem}>
       <div className={styles.innerContainer}>
-        <input
-          type="checkbox"
-          className={styles.checkbox}
-          checked={isChecked}
-          onChange={handleCheckboxClick}
-        ></input>
-        <p className={`${styles.itemText}`}>{description}</p>
+        <div className={styles.checkAndText}>
+          <input
+            type="checkbox"
+            className={styles.checkbox}
+            checked={isChecked}
+            onChange={handleCheckboxClick}
+          ></input>
+          <p className={`${styles.itemText}`}>{description}</p>
+        </div>
 
         <Dropdown>
           <Dropdown.Toggle

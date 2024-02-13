@@ -1,5 +1,5 @@
 :global(.dropdown-menu) {
-  background-color: transparent !important;
+  background-color: white !important;
 }
 
 .ellipse {
@@ -14,11 +14,11 @@
 
 .itemText {
   margin: 0;
-  font-size: 1.3rem;
+  font-size: 1rem;
 }
 
 .dropdown {
-  background-color: transparent !important;
+  background-color: white !important;
 }
 
 :global(.dropdown-toggle::after) {
@@ -31,9 +31,24 @@
 
 .listItem {
   list-style: none;
+
+  padding: 8px;
+}
+
+.innerContainer {
+  padding: 8px;
+  border: 1px solid black;
+  border-radius: 0.75rem;
+  display: flex;
+  justify-content: space-between;
 }
 
 .button {
   background-color: transparent;
   border: none;
+}
+
+.checkAndText {
+  display: flex;
+  gap: 0.5rem;
 }

@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import styles from "./CreateForm.module.scss";
 
 const CreateForm = ({ handleItemCrud, currentList, singleLists }) => {
   const [description, setDescription] = useState("");
@@ -38,8 +39,11 @@ const CreateForm = ({ handleItemCrud, currentList, singleLists }) => {
           onChange={(e) => setDescription(e.target.value)}
           required
           placeholder="New ToDo..."
+          maxLength={30}
         ></input>
-        <button type="submit">Add</button>
+        <button type="submit" className={styles.createButton}>
+          Add to {currentList}
+        </button>
       </form>
     </section>
   );
