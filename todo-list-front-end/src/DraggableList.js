@@ -19,9 +19,16 @@ const DraggableList = ({
     return matchingList ? matchingList.id : null;
   };
 
-  const filteredItems = items.filter((item) =>
-    item.singleListIds.includes(getListId(currentList))
-  );
+  // const filteredItems = items.filter((item) =>
+  //   item.singleListIds.includes(getListId(currentList))
+  // );
+
+  const filteredItems =
+    currentList === "All"
+      ? items
+      : items.filter((item) =>
+          item.singleListIds.includes(getListId(currentList))
+        );
 
   const createItemsDto = (filteredItems) =>
     filteredItems.map((item) => ({
@@ -52,6 +59,7 @@ const DraggableList = ({
       <div className={styles.listPicker}>
         <span className={styles.listPickerTitle}>List Picker:</span>
         <select onChange={handleListChange} value={currentList}>
+          <option value="All">All</option>
           {singleLists.map((list) => (
             <option key={list.id} value={list.name}>
               {list.name}
