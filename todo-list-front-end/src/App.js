@@ -5,10 +5,6 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.scss";
 
 function App() {
-  const [items, setItems] = useState([]);
-  const [currentList, setCurrentList] = useState("Daily");
-  const [singleLists, setSingleLists] = useState([]);
-
   const fetchItems = () => {
     fetch("https://localhost:44396/api/Item")
       .then((response) => response.json())
@@ -25,6 +21,10 @@ function App() {
       console.error("Error fetching single lists:", error);
     }
   };
+
+  const [items, setItems] = useState([]);
+  const [currentList, setCurrentList] = useState("Work");
+  const [singleLists, setSingleLists] = useState([]);
 
   useEffect(() => {
     fetchItems();
