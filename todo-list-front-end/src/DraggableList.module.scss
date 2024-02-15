@@ -1,1 +1,10 @@
+.listSection {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
 
+  .listPicker {
+    display: flex;
+    gap: 1rem;
+  }
+}

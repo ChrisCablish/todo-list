@@ -32,7 +32,7 @@ const CreateForm = ({ handleItemCrud, currentList, singleLists }) => {
 
   return (
     <section>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} className={styles.createSection}>
         <input
           type="text"
           value={description}
@@ -40,6 +40,7 @@ const CreateForm = ({ handleItemCrud, currentList, singleLists }) => {
           required
           placeholder="New ToDo..."
           maxLength={30}
+          className={styles.createInput}
         ></input>
         <button type="submit" className={styles.createButton}>
           Add to {currentList}

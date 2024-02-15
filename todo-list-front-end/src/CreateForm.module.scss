@@ -3,7 +3,7 @@
   outline: 0;
   text-align: center;
   cursor: pointer;
-  padding: 0px 16px;
+  padding: 0px 8px;
   border-radius: 2px;
   min-width: 80px;
   height: 32px;
@@ -17,4 +17,12 @@
     background-color: rgb(16, 110, 190);
     border: 1px solid rgb(16, 110, 190);
   }
+}
+.createSection {
+  display: flex;
+  justify-content: space-between;
+}
+
+.createInput {
+  width: 60%;
 }
