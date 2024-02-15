@@ -25,4 +25,9 @@
 
 .createInput {
   width: 60%;
+  padding-left: 8px;
+}
+
+.createInput::placeholder {
+  font-weight: 300;
 }

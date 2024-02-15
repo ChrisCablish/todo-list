@@ -1,3 +1,6 @@
+// <uniquifier>: Use a uniquifier for the class name
+// <weight>: Use a value from 200 to 700
+
 :global(.dropdown-menu) {
   background-color: white !important;
 }
@@ -37,7 +40,6 @@
 .innerContainer {
   padding: 8px;
   border: 1px solid black;
-  border-radius: 0.75rem;
   display: flex;
   justify-content: space-between;
 }

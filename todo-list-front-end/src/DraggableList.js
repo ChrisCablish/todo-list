@@ -50,7 +50,7 @@ const DraggableList = ({
   return (
     <section className={styles.listSection}>
       <div className={styles.listPicker}>
-        <span>List Picker:</span>
+        <span className={styles.listPickerTitle}>List Picker:</span>
         <select onChange={handleListChange} value={currentList}>
           {singleLists.map((list) => (
             <option key={list.id} value={list.name}>

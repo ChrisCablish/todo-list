@@ -6,5 +6,9 @@
   .listPicker {
     display: flex;
     gap: 1rem;
+
+    .listPickerTitle {
+      font-weight: 300;
+    }
   }
 }

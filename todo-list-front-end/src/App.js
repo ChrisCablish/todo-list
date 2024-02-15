@@ -37,7 +37,7 @@ function App() {
 
   return (
     <section className="App">
-      <div className="appWrapper">
+      <div className="appWrapper oswaldreg">
         <CreateForm
           handleItemCrud={handleItemCrud}
           currentList={currentList}

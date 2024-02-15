@@ -58,7 +58,7 @@ const IndividualListItem = ({
   };
 
   return (
-    <li className={styles.listItem}>
+    <li className={`${styles.listItem} ${styles.oswaldreg}`}>
       <div className={styles.innerContainer}>
         <div className={styles.checkAndText}>
           <input
