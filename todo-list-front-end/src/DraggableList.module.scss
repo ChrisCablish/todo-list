@@ -1,3 +1,5 @@
+@import "./variables.scss";
+
 .listSection {
   display: flex;
   flex-direction: column;
@@ -11,4 +13,22 @@
       font-weight: 300;
     }
   }
+}
+
+.colorBlock {
+  background-color: black;
+  height: 1rem;
+  width: 1rem;
+}
+
+.blue {
+  color: $darkBlue;
+}
+
+.green {
+  color: $darkGreen;
+}
+
+.red {
+  color: $red;
 }

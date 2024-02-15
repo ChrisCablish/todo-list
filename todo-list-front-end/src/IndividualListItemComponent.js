@@ -58,27 +58,6 @@ const IndividualListItem = ({
     updateIsComplete(newIsComplete); //backend changes
   };
 
-  // const listAssociatedId = singleListIds[0];
-
-  // console.log(listAssociatedId);
-
-  // const getListName = (id) => {
-  //   const list = singleLists.find((list) => list.id === id);
-  //   return list ? list.name : undefined;
-  // };
-
-  // console.log(getListName(listAssociatedId));
-
-  // const colorCode = {
-  //   Work: "$blue",
-  //   School: "$green",
-  //   Chores: "$red",
-  // };
-
-  // const setColor = (colorCode,) => {
-  //   return colorCode.find((code) => {})
-  // }
-
   const findColor = () => {
     const listId = singleListIds[0];
     const list = singleLists.find((list) => list.id === listId);
@@ -91,7 +70,6 @@ const IndividualListItem = ({
       School: "green",
       Chores: "red",
     };
-
     return colorCode[listName] || null;
   };
 
