@@ -1,5 +1,4 @@
-// <uniquifier>: Use a uniquifier for the class name
-// <weight>: Use a value from 200 to 700
+@import "./variables.scss";
 
 :global(.dropdown-menu) {
   background-color: white !important;
@@ -52,4 +51,19 @@
 .checkAndText {
   display: flex;
   gap: 0.5rem;
+}
+
+.blue {
+  background-color: $blue;
+  border-color: $darkBlue;
+}
+
+.green {
+  background-color: $green;
+  border-color: $darkGreen;
+}
+
+.red {
+  background-color: $red;
+  border-color: $darkRed;
 }

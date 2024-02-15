@@ -35,6 +35,7 @@ const DraggableList = ({
       id: String(item.id),
       description: item.description,
       isComplete: item.isComplete,
+      singleListIds: item.singleListIds,
     }));
 
   const [itemsDto, setItemsDto] = useState(createItemsDto(filteredItems));
@@ -83,6 +84,7 @@ const DraggableList = ({
                         key={item.id}
                         description={item.description}
                         id={item.id}
+                        singleListIds={item.singleListIds}
                         isComplete={item.isComplete}
                         singleLists={singleLists}
                         currentList={currentList}

@@ -10,6 +10,7 @@ const IndividualListItem = ({
   currentList,
   handleItemCrud,
   isComplete,
+  singleListIds,
 }) => {
   const moveToList = singleLists.filter((list) => list.name !== currentList);
 
@@ -57,9 +58,48 @@ const IndividualListItem = ({
     updateIsComplete(newIsComplete); //backend changes
   };
 
+  // const listAssociatedId = singleListIds[0];
+
+  // console.log(listAssociatedId);
+
+  // const getListName = (id) => {
+  //   const list = singleLists.find((list) => list.id === id);
+  //   return list ? list.name : undefined;
+  // };
+
+  // console.log(getListName(listAssociatedId));
+
+  // const colorCode = {
+  //   Work: "$blue",
+  //   School: "$green",
+  //   Chores: "$red",
+  // };
+
+  // const setColor = (colorCode,) => {
+  //   return colorCode.find((code) => {})
+  // }
+
+  const findColor = () => {
+    const listId = singleListIds[0];
+    const list = singleLists.find((list) => list.id === listId);
+    if (!list) return null;
+
+    const listName = list.name;
+
+    const colorCode = {
+      Work: "blue",
+      School: "green",
+      Chores: "red",
+    };
+
+    return colorCode[listName] || null;
+  };
+
+  const colorClass = findColor();
+
   return (
     <li className={`${styles.listItem} ${styles.oswaldreg}`}>
-      <div className={styles.innerContainer}>
+      <div className={`${styles.innerContainer} ${styles[colorClass]}`}>
         <div className={styles.checkAndText}>
           <input
             type="checkbox"
