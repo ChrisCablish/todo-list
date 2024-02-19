@@ -106,6 +106,31 @@ namespace ToDoListAPI.Controllers
             return Ok(item); 
         }
 
+        [HttpPut("{id}/changelist")]
+        public async Task<IActionResult> ChangeSingleList(int id, [FromBody] List<int> singleListIds)
+        {
+            var item = await _context.Items.Include(i => i.SingleLists).FirstOrDefaultAsync(i => i.Id == id);
+            if (item == null)
+            {
+                return NotFound();
+            }
+
+            // Clear existing SingleLists
+            item.SingleLists.Clear();
+
+            // Fetch and add the new SingleLists
+            var newSingleLists = await _context.SingleLists.Where(sl => singleListIds.Contains(sl.Id)).ToListAsync();
+            foreach (var singleList in newSingleLists)
+            {
+                item.SingleLists.Add(singleList);
+            }
+
+            await _context.SaveChangesAsync();
+
+            return Ok(item); // Or any other appropriate response
+        }
+
+
 
     }
 }
