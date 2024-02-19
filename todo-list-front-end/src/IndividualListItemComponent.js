@@ -75,6 +75,29 @@ const IndividualListItem = ({
 
   const colorClass = findColor();
 
+  const handleMoveTo = async (targetListId) => {
+    const newSingleListIds = [targetListId];
+    try {
+      const response = await fetch(
+        `https://localhost:44396/api/Item/${id}/changelist`,
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(newSingleListIds),
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error("Error updating item's list association");
+      }
+      handleItemCrud(); // Update and re-fetch items to reflect the change
+    } catch (error) {
+      console.error("Error:", error);
+    }
+  };
+
   return (
     <li className={`${styles.listItem} ${styles.oswaldreg}`}>
       <div className={`${styles.innerContainer} ${styles[colorClass]}`}>
@@ -106,7 +129,11 @@ const IndividualListItem = ({
           <Dropdown.Menu>
             <Dropdown.Item onClick={deleteHandler}>Delete</Dropdown.Item>
             {moveToList.map((list, index) => (
-              <Dropdown.Item href="#/action-1" key={index}>
+              <Dropdown.Item
+                href="#/action-1"
+                key={index}
+                onClick={() => handleMoveTo(list.id)}
+              >
                 Move to {list.name}
               </Dropdown.Item>
             ))}
