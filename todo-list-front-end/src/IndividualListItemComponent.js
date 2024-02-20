@@ -12,7 +12,10 @@ const IndividualListItem = ({
   isComplete,
   singleListIds,
 }) => {
-  const moveToList = singleLists.filter((list) => list.name !== currentList);
+  const [firstSingleListId] = singleListIds;
+  const moveToList = singleLists.filter(
+    (list) => list.id !== firstSingleListId
+  );
 
   const deleteHandler = async () => {
     try {
