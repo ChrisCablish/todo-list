@@ -38,7 +38,7 @@ const CreateForm = ({ handleItemCrud, currentList, singleLists }) => {
           value={description}
           onChange={(e) => setDescription(e.target.value)}
           required
-          // placeholder="New ToDo..."
+          disabled={currentList === "All"}
           placeholder={
             currentList === "All"
               ? "Select a list from list picker"
