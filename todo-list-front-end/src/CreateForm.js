@@ -38,12 +38,23 @@ const CreateForm = ({ handleItemCrud, currentList, singleLists }) => {
           value={description}
           onChange={(e) => setDescription(e.target.value)}
           required
-          placeholder="New ToDo..."
+          // placeholder="New ToDo..."
+          placeholder={
+            currentList === "All"
+              ? "Select a list from list picker"
+              : `New ${currentList} Todo...`
+          }
           maxLength={30}
           className={styles.createInput}
         ></input>
-        <button type="submit" className={styles.createButton}>
-          Add to {currentList}
+        <button
+          type="submit"
+          className={`${styles.createButton} ${
+            currentList === "All" ? styles.deactivate : ""
+          }`}
+          disabled={currentList === "All"}
+        >
+          Add to {currentList !== "All" ? currentList : "..."}
         </button>
       </form>
     </section>

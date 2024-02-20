@@ -23,7 +23,7 @@ function App() {
   };
 
   const [items, setItems] = useState([]);
-  const [currentList, setCurrentList] = useState("Work");
+  const [currentList, setCurrentList] = useState("All");
   const [singleLists, setSingleLists] = useState([]);
 
   useEffect(() => {
