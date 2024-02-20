@@ -3,7 +3,6 @@ import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 import IndividualListItem from "./IndividualListItemComponent";
 import styles from "./DraggableList.module.scss";
 
-//this is a chnge to list-order
 const DraggableList = ({
   items,
   currentList,
@@ -20,13 +19,36 @@ const DraggableList = ({
     return matchingList ? matchingList.id : null;
   };
 
+  // get order from localstorage
+  const reorderItemsBasedOnSavedOrder = (items) => {
+    const savedOrder = JSON.parse(localStorage.getItem("listOrder"));
+    if (savedOrder && savedOrder.length > 0) {
+      const orderedItems = [];
+      savedOrder.forEach((id) => {
+        const item = items.find((item) => String(item.id) === id);
+        if (item) {
+          orderedItems.push(item);
+        }
+      });
+      return orderedItems.concat(
+        items.filter((item) => !savedOrder.includes(String(item.id)))
+      );
+    }
+    return items;
+  };
+
+  // apply the persisted order before filtering
+  const orderedItems = reorderItemsBasedOnSavedOrder(items);
+
+  //filter based on current list
   const filteredItems =
     currentList === "All"
-      ? items
-      : items.filter((item) =>
+      ? orderedItems
+      : orderedItems.filter((item) =>
           item.singleListIds.includes(getListId(currentList))
         );
 
+  //dto for changing id to string data type
   const createItemsDto = (filteredItems) =>
     filteredItems.map((item) => ({
       id: String(item.id),
@@ -37,10 +59,10 @@ const DraggableList = ({
 
   const [itemsDto, setItemsDto] = useState(createItemsDto(filteredItems));
 
-  // Update itemsDto whenever items prop changes
+  // Update on mount and when dependenies change
   useEffect(() => {
     setItemsDto(createItemsDto(filteredItems));
-  }, [items, currentList, singleLists]); // Dependency array includes items to track changes
+  }, [items, currentList, singleLists]);
 
   const onDragEnd = (result) => {
     if (!result.destination) return;
