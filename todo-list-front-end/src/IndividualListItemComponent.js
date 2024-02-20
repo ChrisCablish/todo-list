@@ -108,7 +108,13 @@ const IndividualListItem = ({
             checked={isChecked}
             onChange={handleCheckboxClick}
           ></input>
-          <p className={`${styles.itemText}`}>{description}</p>
+          <p
+            className={`${styles.itemText} ${
+              isChecked ? styles.isChecked : ""
+            }`}
+          >
+            {description}
+          </p>
         </div>
 
         <Dropdown>
