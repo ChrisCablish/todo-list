@@ -47,9 +47,15 @@ const DraggableList = ({
 
     const newArray = Array.from(itemsDto);
     const [removed] = newArray.splice(result.source.index, 1);
-    newArray.splice(result.destination.index, 0, removed);
+    newArray.splice(result.destination.index, 0, removed); //newArray is the new order
 
     setItemsDto(newArray);
+
+    //store the new order in localStorage
+    const itemOrder = newArray.map((item) => item.id); //store an array of id's
+    localStorage.setItem("listOrder", JSON.stringify(itemOrder));
+
+    console.log("New order saved:", itemOrder);
   };
 
   return (
