@@ -3,6 +3,7 @@ import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 import IndividualListItem from "./IndividualListItemComponent";
 import styles from "./DraggableList.module.scss";
 
+//this is a chnge to list-order
 const DraggableList = ({
   items,
   currentList,
@@ -18,10 +19,6 @@ const DraggableList = ({
     const matchingList = singleLists.find((list) => list.name === listName);
     return matchingList ? matchingList.id : null;
   };
-
-  // const filteredItems = items.filter((item) =>
-  //   item.singleListIds.includes(getListId(currentList))
-  // );
 
   const filteredItems =
     currentList === "All"
