@@ -143,7 +143,20 @@ const IndividualListItem = ({
                 key={index}
                 onClick={() => handleMoveTo(list.id)}
               >
-                Move to {list.name}
+                Move to{" "}
+                <span
+                  className={
+                    list.name === "Work"
+                      ? `${styles.textblue}`
+                      : list.name === "School"
+                      ? `${styles.textgreen}`
+                      : list.name === "Chores"
+                      ? `${styles.textred}`
+                      : ""
+                  }
+                >
+                  {list.name}
+                </span>
               </Dropdown.Item>
             ))}
           </Dropdown.Menu>
