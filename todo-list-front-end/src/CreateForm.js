@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import styles from "./CreateForm.module.scss";
 
 const CreateForm = ({ handleItemCrud, currentList, singleLists }) => {
+  const apiUrl = process.env.REACT_APP_API_URL;
+
   const [description, setDescription] = useState("");
 
   const handleSubmit = async (event) => {
@@ -14,7 +16,7 @@ const CreateForm = ({ handleItemCrud, currentList, singleLists }) => {
     }
     const item = { description: description, singleListIds: [listId] };
 
-    const response = await fetch("https://localhost:44396/api/Item", {
+    const response = await fetch(`${apiUrl}/Item`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

@@ -5,8 +5,10 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.scss";
 
 function App() {
+  const apiUrl = process.env.REACT_APP_API_URL;
+
   const fetchItems = () => {
-    fetch("https://localhost:44396/api/Item")
+    fetch(`${apiUrl}/Item`)
       .then((response) => response.json())
       .then((data) => setItems(data))
       .catch((error) => console.error("Error fetching items:", error));
@@ -14,7 +16,7 @@ function App() {
 
   const fetchSingleLists = async () => {
     try {
-      const response = await fetch("https://localhost:44396/api/SingleList");
+      const response = await fetch(`${apiUrl}/SingleList`);
       const data = await response.json();
       setSingleLists(data);
     } catch (error) {

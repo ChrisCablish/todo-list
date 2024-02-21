@@ -12,6 +12,8 @@ const IndividualListItem = ({
   isComplete,
   singleListIds,
 }) => {
+  const apiUrl = process.env.REACT_APP_API_URL;
+
   const [firstSingleListId] = singleListIds;
   const moveToList = singleLists.filter(
     (list) => list.id !== firstSingleListId
@@ -19,7 +21,7 @@ const IndividualListItem = ({
 
   const deleteHandler = async () => {
     try {
-      const response = await fetch(`https://localhost:44396/api/Item/${id}`, {
+      const response = await fetch(`${apiUrl}/Item/${id}`, {
         method: "DELETE",
       });
       if (!response.ok) {
