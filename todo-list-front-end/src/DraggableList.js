@@ -62,7 +62,7 @@ const DraggableList = ({
   // Update on mount and when dependenies change
   useEffect(() => {
     setItemsDto(createItemsDto(filteredItems));
-  }, [filteredItems, currentList, singleLists]);
+  }, [items, currentList, singleLists]);
 
   const onDragEnd = (result) => {
     if (!result.destination) return;
