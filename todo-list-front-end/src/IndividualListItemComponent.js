@@ -37,16 +37,13 @@ const IndividualListItem = ({
 
   const updateIsComplete = async (newIsComplete) => {
     try {
-      const response = await fetch(
-        `https://localhost:44396/api/Item/${id}/complete`,
-        {
-          method: "PUT",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(newIsComplete),
-        }
-      );
+      const response = await fetch(`${apiUrl}/Item/${id}/complete`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(newIsComplete),
+      });
       if (!response.ok) {
         setIsChecked(!isChecked); //revert optimistic UI if error
         throw new Error("Error updating item complete status");
@@ -83,16 +80,13 @@ const IndividualListItem = ({
   const handleMoveTo = async (targetListId) => {
     const newSingleListIds = [targetListId];
     try {
-      const response = await fetch(
-        `https://localhost:44396/api/Item/${id}/changelist`,
-        {
-          method: "PUT",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(newSingleListIds),
-        }
-      );
+      const response = await fetch(`${apiUrl}/Item/${id}/changelist`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(newSingleListIds),
+      });
 
       if (!response.ok) {
         throw new Error("Error updating item's list association");
