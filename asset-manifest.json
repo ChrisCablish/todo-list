@@ -1,0 +1,16 @@
+{
+  "files": {
+    "main.css": "/todo-list/static/css/main.8fc62031.css",
+    "main.js": "/todo-list/static/js/main.da7fe961.js",
+    "static/js/453.ed9bddfc.chunk.js": "/todo-list/static/js/453.ed9bddfc.chunk.js",
+    "index.html": "/todo-list/index.html",
+    "static/media/ellipsis-svgrepo-com.svg": "/todo-list/static/media/ellipsis-svgrepo-com.d9ef3a6ac57d32073504551dd2deedda.svg",
+    "main.8fc62031.css.map": "/todo-list/static/css/main.8fc62031.css.map",
+    "main.da7fe961.js.map": "/todo-list/static/js/main.da7fe961.js.map",
+    "453.ed9bddfc.chunk.js.map": "/todo-list/static/js/453.ed9bddfc.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.8fc62031.css",
+    "static/js/main.da7fe961.js"
+  ]
+}
