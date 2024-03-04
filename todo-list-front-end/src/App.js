@@ -1,6 +1,7 @@
 import DraggableList from "./DraggableList";
 import CreateForm from "./CreateForm";
 import React, { useState, useEffect } from "react";
+import SpinnerComponent from "./SpinnerComponenet";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.scss";
 
@@ -53,6 +54,7 @@ function App() {
           singleLists={singleLists}
           handleItemCrud={handleItemCrud}
         />
+        <SpinnerComponent />
       </div>
     </section>
   );
