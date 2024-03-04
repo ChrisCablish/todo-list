@@ -9,33 +9,39 @@ function App() {
   const apiUrl = process.env.REACT_APP_API_URL;
 
   const fetchItems = () => {
+    setIsLoading(true);
     fetch(`${apiUrl}/Item`)
       .then((response) => response.json())
       .then((data) => setItems(data))
       .catch((error) => console.error("Error fetching items:", error));
   };
 
-  const fetchSingleLists = async () => {
-    try {
-      const response = await fetch(`${apiUrl}/SingleList`);
-      const data = await response.json();
-      setSingleLists(data);
-    } catch (error) {
-      console.error("Error fetching single lists:", error);
-    }
-  };
-
   const [items, setItems] = useState([]);
   const [currentList, setCurrentList] = useState("All");
   const [singleLists, setSingleLists] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
-    fetchItems();
-    fetchSingleLists();
-  }, []);
+    setIsLoading(true);
+    Promise.all([
+      fetch(`${apiUrl}/Item`).then((response) => response.json()),
+      fetch(`${apiUrl}/SingleList`).then((response) => response.json()),
+    ])
+      .then(([itemsData, singleListsData]) => {
+        setItems(itemsData);
+        setSingleLists(singleListsData);
+      })
+      .catch((error) => {
+        console.error("Error fetching data:", error);
+      })
+      .finally(() => {
+        setIsLoading(false);
+      });
+  }, [apiUrl]); // Include apiUrl in the dependency array if it's not a constant
 
   const handleItemCrud = () => {
-    fetchItems(); //refetch items
+    fetchItems();
+    setIsLoading(false);
   };
 
   return (
@@ -54,9 +60,10 @@ function App() {
           singleLists={singleLists}
           handleItemCrud={handleItemCrud}
         />
-        <SpinnerComponent />
+        {isLoading && <SpinnerComponent />}
       </div>
     </section>
   );
 }
+
 export default App;
